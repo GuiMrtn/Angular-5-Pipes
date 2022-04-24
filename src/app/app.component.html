@@ -1,0 +1,26 @@
+<h1 class="center">Liste de pokemons</h1>
+<div class="container">
+    <div class="row">
+        <div *ngFor="let pokemon of pokemonList" class="col m4 s6">
+            <div class="card horizontal" pkmnBorderCard>
+                <div class="card-image">
+                    <img [src]="pokemon.picture">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>{{ pokemon.name}}</p>
+                        <!-- Ici, on ajoute un pipe date pour un nouvel affichage de date et uppercase, pour avoir la date en majuscule. Attention à l'ordre de déclaration, les pipes se lisent de gauche à droite par le navigateur. Le soucis est que le pipe date est déjà défini. Si on souhaite le modifier, il faut ajouter :"" -->
+                        <p><small> {{ pokemon.created | date:"dd/MM/yyyy" }} </small></p>
+                        <!-- Ici, on insère nos bulles de couleurs en utilisant un *ngFor car un pokémon peut avoir plusieurs types. Puis on ajoute une class avec type et le nom du pipe qu'on vient de créer-->
+                        <span 
+                            *ngFor="let type of pokemon.types" class="{{ type | pokemonTypeColor }}"
+                        >
+                            <!-- Ici, on met le nom du type en tant que tel, récupéré avec le ngFor-->
+                            {{ type }}
+                        </span>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
